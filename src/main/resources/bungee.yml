@@ -1,0 +1,4 @@
+name: Transmission
+version: Bungee
+main: net.thenova.transmission.proxy.ProxyCore
+author: Arraying
