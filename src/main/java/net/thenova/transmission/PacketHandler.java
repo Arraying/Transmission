@@ -1,8 +1,4 @@
-package net.thenova.transmission.server.event;
-
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
+package net.thenova.transmission;
 
 /**
  * Copyright 2018 Arraying
@@ -19,14 +15,26 @@ import org.bukkit.event.Listener;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ServerListener implements Listener {
+public interface PacketHandler {
 
     /**
-     * When a packet is sent out.
-     * @param event The event.
+     * Handles the packet.
+     * @param packet The packet.
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPacket(ServerSendEvent event) {
+    @SuppressWarnings("EmptyMethod")
+    void handle(Packet packet);
+
+    /**
+     * An empty implementation.
+     */
+    final class NoImplementation implements PacketHandler {
+
+        /**
+         * Does nothing.
+         * @param packet The packet.
+         */
+        @Override
+        public void handle(Packet packet) {}
 
     }
 
