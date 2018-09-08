@@ -1,4 +1,0 @@
-name: Transmission
-version: Spigot
-main: net.thenova.transmission.server.ServerCore
-author: Arraying

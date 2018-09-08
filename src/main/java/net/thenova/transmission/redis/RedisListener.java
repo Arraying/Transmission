@@ -1,8 +1,8 @@
 package net.thenova.transmission.redis;
 
 import de.arraying.kotys.JSON;
-import net.thenova.transmission.Core;
-import net.thenova.transmission.packet.Packet;
+import net.thenova.transmission.Transmission;
+import net.thenova.transmission.Packet;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.Arrays;
@@ -22,7 +22,17 @@ import java.util.Arrays;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class RedisListener extends JedisPubSub {
+final class RedisListener extends JedisPubSub {
+
+    private final Transmission transmission;
+
+    /**
+     * Creates a new Redis listener.
+     * @param transmission The transmission.
+     */
+    RedisListener(Transmission transmission) {
+        this.transmission = transmission;
+    }
 
     /**
      * When a message is received.
@@ -31,7 +41,7 @@ public final class RedisListener extends JedisPubSub {
      */
     @Override
     public void onMessage(String channel, String message) {
-        if(!channel.equals(Redis.CHANNEL)) {
+        if(!channel.equals(RedisHandler.CHANNEL)) {
             return;
         }
         Packet packet;
@@ -42,8 +52,8 @@ public final class RedisListener extends JedisPubSub {
             exception.printStackTrace();
             return;
         }
-        if(packet.isForEveryone() || Arrays.stream(packet.getReceivers()).anyMatch(it -> it.equals(Core.INSTANCE.getConfiguration().getId()))) {
-            Core.INSTANCE.getPacketHandler().handle(packet);
+        if(packet.isForEveryone() || Arrays.stream(packet.getReceivers()).anyMatch(it -> it.equals(transmission.getIdentifier()))) {
+            transmission.getPacketHandler().handle(packet);
         }
     }
 

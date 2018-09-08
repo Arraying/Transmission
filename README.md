@@ -1,7 +1,7 @@
 # Transmission
-Event driven Bungee and Spigot communication
+Redis PubSub messaging made simple.
 
-# Dependency information
+# Installation
 ```xml
 <repositories>
     <repository>
@@ -9,6 +9,8 @@ Event driven Bungee and Spigot communication
         <url>https://jitpack.io</url>
     </repository>
 </repositories>
+```
+```xml
 <dependencies>
     <dependency>
         <groupId>com.github.Arraying</groupId>

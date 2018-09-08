@@ -1,4 +1,4 @@
-package net.thenova.transmission.packet;
+package net.thenova.transmission;
 
 import de.arraying.kotys.JSON;
 import de.arraying.kotys.JSONField;
@@ -18,6 +18,7 @@ import de.arraying.kotys.JSONField;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@SuppressWarnings("unused")
 public final class Packet {
 
     @JSONField(key = "r") private String[] receivers;
@@ -58,6 +59,14 @@ public final class Packet {
     }
 
     /**
+     * Gets the sender.
+     * @return The sender.
+     */
+    public String getSender() {
+        return sender;
+    }
+
+    /**
      * Gets the payload.
      * @return The payload (may be null).
      */
@@ -69,7 +78,7 @@ public final class Packet {
      * Converts the packet to JSON.
      * @return The JSON packet.
      */
-    public JSON toJSON() {
+    JSON toJSON() {
         return new JSON()
                 .put("r", receivers)
                 .put("s", sender)
