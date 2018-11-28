@@ -46,9 +46,10 @@ final class RedisListener extends JedisPubSub {
         }
         Packet packet;
         try {
+            System.out.println("Received '" + message + "'.");
             JSON json = new JSON(message);
             packet = json.marshal(Packet.class);
-        } catch(IllegalArgumentException | IllegalStateException exception) {
+        } catch(IllegalArgumentException | IllegalStateException | NullPointerException exception) {
             exception.printStackTrace();
             return;
         }
